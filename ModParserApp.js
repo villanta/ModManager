@@ -33,7 +33,7 @@ http.createServer(function (req, res) {
     }
 }).listen(8080);
 
-function respond(queryData, modJson, res) {
+function respond(queryData, modJson, res) { 
     var output = "";
     var modCount = 0;
     for (var i = 0; i < modJson.length; i++) {
