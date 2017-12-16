@@ -1,54 +1,84 @@
 <!DOCTYPE html>
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--Import jQuery before materialize.js-->
+<!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+<script>$(document).ready(function () {
+        // Select - Single
+        $('select:not([multiple])').material_select();
+    });</script>
 
 <body>
 
     <div ng-app="typeSelector" ng-controller="myCtrl">
-
-        <p>Select Slot</p>
-
-        <select ng-model="slotName" ng-options="x for x in slotnames">
-        </select>
-
-        <p>Enter Character Name</p>
-
-        <input type="text" ng-model="characterName">
-        </input>
-
-        <p>Select Dots</p>
-
-        <select ng-model="dot" ng-options="x for x in dots">
-        </select>
-
-        <h2>You selected: {{dot}}</h2>
-
-        <p>Note that the selected value represents an object.</p>
-
-        <p>{{modlist.length}} mods found</p>
-
-        <ul>
-            <li ng-repeat="x in mods | filter: {slotname:slotName, charname:characterName, dotcount:dot} as modlist">
-                <div class="mod-box">
-                    <h3>{{ x.dotcount }} dot {{ x.set }} {{ x.slotname }} mod</h3>
-                    <p>Equipped on: {{ x.charname }}
-                        <br> Level: {{ x.level }}
-                        <br> Primary: {{ x.primary.value }} {{x.primary.type }}
-                        <br>
-                    </p>
-                    <p>
-                        <div class="secondary-stats" ng-repeat="secondary in x.secondaries">
-                            {{ secondary.value }} {{ secondary.type }}
-                            <br>
-                        </div>
-                    </p>
+        <div class="container">
+            <div class="row">
+                <div class="col s3">
+                    <input-field>
+                        <select ng-model="slotName" ng-options="x for x in slotnames" materialize="material_select" />
+                        <label>Select Slot</label>
+                    </input-field>
                 </div>
-            </li>
-        </ul>
+                <div class="col s3">
+                    <input-field>
+                        <input type="text" ng-model="characterName" />
+                        <label>Enter Character Name</label>
+                    </input-field>
+                </div>
+                <div class="col s3">
+                    <input-field>
+                        <select ng-model="dot" ng-options="x for x in dots" materialize="material_select" />
+                        <label>Select Dots</label>
+                    </input-field>
+                </div>
+            </div>
+
+            <h2>You selected: {{dot}}</h2>
+
+            <p>Note that the selected value represents an object.</p>
+
+            <p>{{modlist.length}} mods found</p>
+
+            <ul>
+                <li ng-repeat="x in mods | filter: {slotname:slotName, charname:characterName, dotcount:dot} as modlist">
+                    <div class="card-panel hoverable">
+                        <h3>{{ x.dotcount }} dot {{ x.set }} {{ x.slotname }} mod</h3>
+                        <p>Equipped on: {{ x.charname }}
+                            <br> Level: {{ x.level }}
+                            <br> Primary: {{ x.primary.value }} {{x.primary.type }}
+                            <br>
+                        </p>
+                        <p>
+                            <div class="secondary-stats" ng-repeat="secondary in x.secondaries">
+                                {{ secondary.value }} {{ secondary.type }}
+                                <br>
+                            </div>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
     </div>
 
     <script>
-        var app = angular.module('typeSelector', []);
+
+        var app = angular.module('typeSelector', ['ui.materialize']);
         app.controller('myCtrl', function ($scope) {
             $scope.slotnames = ["Transmitter", "Receiver", "Processor", "Holo-Array", "Data-Bus", "Multiplexer"];
             $scope.dots = ["I", "II", "III", "IV", "V"]
