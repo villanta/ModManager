@@ -1,0 +1,13 @@
+#ignore everything
+*
+# Now, whitelist anything that's a directory
+!*/
+# now blacklist the node directory
+node_modules
+# And all the file types you're interested in.
+!*.js
+!*.html
+!*.exe
+!launch.json
+!*.css
+!.gitignore
