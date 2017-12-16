@@ -1,0 +1,32 @@
+<!-- given a mod, x -->
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <div class="mod-box">
+            <h3>{{ x.dotcount }} dot {{ x.set }} {{ x.slotname }} mod</h3>
+            <p>Equipped on: {{ x.charname }}
+                <br> Level: {{ x.level }}
+                <br> Primary: {{ x.primary.value }} {{x.primary.type }}
+                <br>
+            </p>
+            <p>
+                <div class="secondary-stats" ng-repeat="secondary in x.secondaries">
+                    {{ secondary.value }} {{ secondary.type }}<br>
+                </div>
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.x = { "charname": "Ahsoka Tano", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Offense", "value": "+46" }, { "type": "Tenacity", "value": "+2%" }, { "type": "Defense", "value": "+1.25%" }, { "type": "Critical Chance", "value": "+1.8%" }] }, { "charname": "Luminara Unduli", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Health%", "value": "+1.92%" }, { "type": "Potency", "value": "+1.84%" }, { "type": "Offense", "value": "+24" }, { "type": "Defense", "value": "+6" }] }, { "charname": "HK-47", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Critical Chance", "value": "+2.76%" }, { "type": "Offense", "value": "+35" }, { "type": "Protection", "value": "+539" }, { "type": "Speed", "value": "+3" }] }, { "charname": "CT-5555 \"Fives\"", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Protection%", "value": "+3.44%" }, { "type": "Health", "value": "+1008" }, { "type": "Protection", "value": "+759" }, { "type": "Potency", "value": "+3.13%" }] }, { "charname": "Darth Vader", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Critical Chance", "value": "+3.9%" }, { "type": "Offense", "value": "+44" }, { "type": "Speed", "value": "+3" }, { "type": "Health%", "value": "+0.67%" }] }, { "charname": "Stormtrooper Han", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Defense", "value": "+2.76%" }, { "type": "Health%", "value": "+0.7%" }, { "type": "Speed", "value": "+5" }, { "type": "Defense", "value": "+8" }] }, { "charname": "Chopper", "slotname": "Transmitter", "dotcount": "V", "rarity": "A", "set": "Health", "level": "15", "primary": { "type": "Offense", "value": "+5.88%" }, "secondaries": [{ "type": "Speed", "value": "+4" }, { "type": "Offense", "value": "+34" }, { "type": "Tenacity", "value": "+2.11%" }, { "type": "Potency", "value": "+1.54%" }] };
+        });
+    </script>
+</body>
+
+</html>
