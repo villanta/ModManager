@@ -37,7 +37,7 @@ function readFromFile(username) {
     var now = new Date();
     var seconds = (now.getTime() - mtime.getTime()) / 1000;
 
-    if (seconds > 600) {
+    if (seconds > 3600) {
         console.log('Older cache data, please update.');
         return [];
     } else {

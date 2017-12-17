@@ -35,6 +35,13 @@ http.createServer(function (req, res) {
 
 function respond(queryData, modJson, res) {
     var output = "";
+    var jsonString = JSON.stringify(modJson);
+    var selectPage = './html/select.html';
+    var html = fs.readFileSync(selectPage).toString();
+
+    html = html.replace('MOD_JSON_SEGMENT', jsonString);
+
+    /*
     var modCount = 0;
     for (var i = 0; i < modJson.length; i++) {
         if (matchesQuery(queryData, modJson[i])) {
@@ -53,9 +60,10 @@ function respond(queryData, modJson, res) {
             modCount++;
         }
     }
+    */
 
     //console.log(output);
-    res.write("Found: " + modCount + " mods.<br>\n" + output);
+    res.write(html);
     res.end();
 }
 
@@ -130,5 +138,4 @@ function doesSecondaryTypeMatch(secondarytype, secondaries) {
         }
     }
     return secondaryStatTypeMatches;
-    
 }
