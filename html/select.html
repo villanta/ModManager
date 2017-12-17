@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-controller="myCtrl as ctrl" ng-app="typeSelector" lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 </head>
 
-<body>
+<body ng-app="typeSelector" layout='row' ng-cloak>
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.1.3/hammer.min.js"></script> -->
     <!-- Angular Material Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
@@ -25,31 +27,48 @@
         angular.module('typeSelector', ['ngMaterial']);
     </script>
 
-    <div ng-controller="myCtrl as ctrl" ng-app="typeSelector">
-        <div class="container">
-            <div layout-gt-sm="row">
-                <md-input-container>
-                    <label>Select Slot</label>
-                    <md-select ng-model="slotName">
-                        <md-option ng-repeat="slotname in ::ctrl.slotnames" ng-value="slotname">
-                            {{ slotname }}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container>
-                    <label>Enter Character Name</label>
-                    <input type="text" ng-model="characterName" />
-                </md-input-container>
-                <md-input-container>
-                    <label>Select Dots</label>
-                    <md-select ng-model="dot">
-                        <md-option ng-repeat="dots in ::ctrl.dots" ng-value="dots">
-                            {{ dots }}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+    <div layout="column" tabIndex="-1" role="main" flex>
+        <!-- <md-sidenav flex=20></md-sidenav> -->
+        <md-toolbar class="site-content-toolbar">
+            <div class="md-toolbar-tools">
+                <div layout="row">
+                    <md-content layout-padding>
+                        <div>
+                            <form name="modForm">
+                                <div layout-gt-xs="row">
+                                    <md-input-container class="md-block" flex-gt-xs>
+                                        <label>Select slot:</label>
+                                        <md-select ng-model="slotName">
+                                            <md-option ng-repeat="slotname in ::slotnames" ng-value="slotname">
+                                                {{ slotname }}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Enter Character Name:</label>
+                                        <input type="text" ng-model="characterName" />
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Select Dots:</label>
+                                        <md-select ng-model="dot">
+                                            <md-option ng-repeat="dots in ::dots" ng-value="dots">
+                                                {{ dots }}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <!--                <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
+                                                <input ng-model="theMax">
+                                            </md-input-container>
+                                        -->
+                                </div>
+                            </form>
+                        </div>
+                    </md-content>
+                </div>
             </div>
-
+        </md-toolbar>
+        <md-content flex class='md-padding'>
             <h2>You selected: {{ dot }}</h2>
 
             <p>Note that the selected value represents an object.</p>
@@ -57,7 +76,7 @@
             <p>{{modlist.length}} mods found</p>
 
             <md-list flex="">
-                <md-list-item class="md-3-line" ng-repeat="x in ctrl.mods | filter: {slotname:slotName, charname:characterName, dotcount:dot} as modlist"
+                <md-list-item class="md-3-line" ng-repeat="x in mods | filter: {slotname:slotName, charname:characterName, dotcount:dot} as modlist"
                     ng-click="null">
                     <div class="card-panel hoverable">
                         <h3>{{ x.dotcount }} dot {{ x.set }} {{ x.slotname }} mod</h3>
@@ -75,21 +94,19 @@
                     </div>
                 </md-list-item>
             </md-list>
-        </div>
-
+        </md-content>
     </div>
 
     <script>
-
         (function () {
             'use strict';
             angular
                 .module('typeSelector', ['ngMaterial'])
-                .controller('myCtrl', function () {
-                    this.slotnames = ["Transmitter", "Receiver", "Processor", "Holo-Array", "Data-Bus", "Multiplexer"];
-                    this.dots = ["I", "II", "III", "IV", "V"]
-                    this.sets = ["Health", ""]
-                    this.mods = [{
+                .controller('myCtrl', function ($scope) {
+                    $scope.slotnames = ["Transmitter", "Receiver", "Processor", "Holo-Array", "Data-Bus", "Multiplexer"];
+                    $scope.dots = ["I", "II", "III", "IV", "V"]
+                    $scope.sets = ["Health", ""]
+                    $scope.mods = [{
                         "charname": "Ahsoka Tano",
                         "slotname": "Transmitter",
                         "dotcount": "V",
@@ -9609,7 +9626,5 @@
         })();
 
     </script>
-
 </body>
-
 </html>
