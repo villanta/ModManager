@@ -16,10 +16,14 @@ var jsonfile = require('jsonfile')
 
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    if (req.url == '/favicon.ico') {
+    if (req.url === '/favicon.ico') {
         res.write("404 - Fuck Off");
         res.end();
-    } else {
+    } else if (req.url === '/') {
+        console.log('home');
+        res.write(getHomePage());
+        res.end();
+     } else {
         var modJson = [];
         var query = url.parse(req.url, true);
         var urlTokens = getUrlTokens(query.pathname);
@@ -27,42 +31,20 @@ http.createServer(function (req, res) {
         if (urlTokens[0] === 'u' && urlTokens.length >= 2) {
             username = urlTokens[urlTokens.length - 1];
             modJson = modDataManager.getModData(username);
-            console.log(query.query);
-            respond(query.query, modJson, res);
+            respond(query.query, username, modJson, res);
         }
     }
 }).listen(8080);
 
-function respond(queryData, modJson, res) {
+function respond(queryData, username, modJson, res) {
     var output = "";
     var jsonString = JSON.stringify(modJson);
     var selectPage = './html/select.html';
     var html = fs.readFileSync(selectPage).toString();
 
     html = html.replace('MOD_JSON_SEGMENT', jsonString);
+    html = html.replace('USERNAME_SEGMENT', '\"' + username + '\"');
 
-    /*
-    var modCount = 0;
-    for (var i = 0; i < modJson.length; i++) {
-        if (matchesQuery(queryData, modJson[i])) {
-            output += "Mod owner: " + modJson[i].charname + "<br>\n";
-            output += "Number of dots: " + modJson[i].dotcount + "<br>\n";
-            output += "Rarity: " + modJson[i].rarity + "<br>\n";
-            output += "Slot: " + modJson[i].slotname + "<br>\n";
-            output += "Set bonus: " + modJson[i].set + "<br>\n";
-            output += "Level: " + modJson[i].level + "<br>\n";
-            output += "\tPrimary: " + modJson[i].primary.type + ": " + modJson[i].primary.value + "<br>\n";
-
-            for (var j = 0; j < modJson[i].secondaries.length; j++) {
-                output += "\t\tSecondary: " + modJson[i].secondaries[j].type + ": " + modJson[i].secondaries[j].value + "<br>\n";
-            }
-            output += "<br>\n";
-            modCount++;
-        }
-    }
-    */
-
-    //console.log(output);
     res.write(html);
     res.end();
 }
@@ -138,4 +120,10 @@ function doesSecondaryTypeMatch(secondarytype, secondaries) {
         }
     }
     return secondaryStatTypeMatches;
+}
+
+function getHomePage() {
+    var homePageFile = './html/home.html';
+    var html = fs.readFileSync(homePageFile).toString();
+    return html;
 }

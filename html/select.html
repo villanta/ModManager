@@ -63,133 +63,161 @@
 
     </script>
 
-    <div class="appClass" layout="column" tabIndex="-1" role="main" flex>
-        <!-- <md-sidenav flex=20></md-sidenav> -->
-        <md-toolbar class="md-medium">
-            <div class="md-toolbar-tools">
-                <span flex></span>
-                <div layout-gt-xs="row">
-                    <md-input-container class="hide-validation-error" flex>
-                        <label>Slot</label>
-                        <md-select ng-model="slotName" md-container-class="mySelect">
-                            <md-option ng-value="">
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="slotname in ::slotnames" ng-value="slotname">
-                                {{ slotname }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container class="hide-validation-error" flex>
-                        <label>Character Name</label>
-                        <input type="text" ng-model="characterName" size="40" />
-                    </md-input-container>
-                    <md-input-container class="hide-validation-error" flex>
-                        <label>Dots</label>
-                        <md-select ng-model="dot" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="dots in ::dots" ng-value="dots">
-                                {{ dots }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container class="hide-validation-error" flex>
-                        <label>Set</label>
-                        <md-select ng-model="setval" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="sets in ::sets" ng-value="sets">
-                                {{ sets }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container class="hide-validation-error" flex>
-                        <label>Primary</label>
-                        <md-select ng-model="primaryval" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="primarytype in ::primarytypes" ng-value="primarytype">
-                                {{ primarytype }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container class="hide-validation-error" flex>
-                        <label>Secondary</label>
-                        <md-select ng-disabled="secondaryval2" ng-model="secondaryval1" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
-                                {{ secondarytype }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container ng-show="secondaryval1" class="hide-validation-error" flex>
-                        <label>Secondary</label>
-                        <md-select ng-disabled="secondaryval3" ng-model="secondaryval2" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
-                                {{ secondarytype }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container ng-show="secondaryval2" class="hide-validation-error" flex>
-                        <label>Secondary</label>
-                        <md-select ng-disabled="secondaryval4" ng-model="secondaryval3" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
-                                {{ secondarytype }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <md-input-container ng-show="secondaryval3" class="hide-validation-error" flex>
-                        <label>Secondary</label>
-                        <md-select ng-model="secondaryval4" md-container-class="mySelect">
-                            <md-option ng-value=''>
-                                <em>None</em>
-                            </md-option>
-                            <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
-                                {{ secondarytype }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
+    <div class="appClass" layout="row" tabIndex="-1" role="main" flex>
+
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-whiteframe="4">
+            <md-toolbar>
+                <h1 class="md-toolbar-tools"> {{ username }} </h1>
+            </md-toolbar>
+            <md-content layout="column" layout-padding>
+                <md-button class="md-raised">
+                    View mods
+                </md-button>
+                <md-button class="md-raised">
+                    Optimise character mods
+                </md-button>
+                <md-button class="md-raised">
+                    Something else
+                </md-button>
+                <md-button class="md-raised">
+                    Something else
+                </md-button>
+            </md-content>
+            <div flex></div>
+            <md-content layout="column" layout-padding>
+                <md-button class="md-raised">
+                    Close
+                </md-button>
+            </md-content>
+        </md-sidenav>
+
+        <div layout="column" flex>
+            <md-toolbar class="md-medium">
+                <div class="md-toolbar-tools">
+                    <span flex></span>
+                    <div layout-gt-xs="row">
+                        <md-input-container class="hide-validation-error" flex>
+                            <label>Slot</label>
+                            <md-select ng-model="slotName" md-container-class="mySelect">
+                                <md-option ng-value="">
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="slotname in ::slotnames" ng-value="slotname">
+                                    {{ slotname }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="hide-validation-error" flex>
+                            <label>Character Name</label>
+                            <input type="text" ng-model="characterName" size="40" />
+                        </md-input-container>
+                        <md-input-container class="hide-validation-error" flex>
+                            <label>Dots</label>
+                            <md-select ng-model="dot" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="dots in ::dots" ng-value="dots">
+                                    {{ dots }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="hide-validation-error" flex>
+                            <label>Set</label>
+                            <md-select ng-model="setval" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="sets in ::sets" ng-value="sets">
+                                    {{ sets }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="hide-validation-error" flex>
+                            <label>Primary</label>
+                            <md-select ng-model="primaryval" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="primarytype in ::primarytypes" ng-value="primarytype">
+                                    {{ primarytype }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="hide-validation-error" flex>
+                            <label>Secondary</label>
+                            <md-select ng-disabled="secondaryval2" ng-model="secondaryval1" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
+                                    {{ secondarytype }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container ng-show="secondaryval1" class="hide-validation-error" flex>
+                            <label>Secondary</label>
+                            <md-select ng-disabled="secondaryval3" ng-model="secondaryval2" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
+                                    {{ secondarytype }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container ng-show="secondaryval2" class="hide-validation-error" flex>
+                            <label>Secondary</label>
+                            <md-select ng-disabled="secondaryval4" ng-model="secondaryval3" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
+                                    {{ secondarytype }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container ng-show="secondaryval3" class="hide-validation-error" flex>
+                            <label>Secondary</label>
+                            <md-select ng-model="secondaryval4" md-container-class="mySelect">
+                                <md-option ng-value=''>
+                                    <em>None</em>
+                                </md-option>
+                                <md-option ng-repeat="secondarytype in ::secondarytypes" ng-value="secondarytype">
+                                    {{ secondarytype }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <span flex></span>
                 </div>
-                <span flex></span>
-            </div>
-        </md-toolbar>
+            </md-toolbar>
 
-        <md-content flex class='md-padding'>
-            <h3>{{modlist.length}} mods found</h3>
+            <md-content flex class='md-padding'>
+                <h3>{{modlist.length}} mods found</h3>
 
-            <div class='md-padding' layout="row" layout-wrap>
-                <md-card style="width: 400px;" ng-repeat="x in mods | filter:isFiltered  | orderBy:modSortFunction as modlist">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">{{ x.dotcount }} dot {{ x.set }} {{ x.slotname }}</span>
-                            <span class="md-subhead">{{ x.charname }}</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-card-content>
-                        <p>
-                            {{ x.primary.value }} {{x.primary.type }}
-                        </p>
-                        <p>
-                            <div class="secondary-stats" ng-repeat="secondary in x.secondaries">
-                                {{ secondary.value }} {{ secondary.type }}
-                            </div>
-                        </p>
-                    </md-card-content>
-                </md-card>
-            </div>
-        </md-content>
+                <div class='md-padding' layout="row" layout-wrap>
+                    <md-card style="width: 400px;" ng-repeat="x in mods | filter:isFiltered  | orderBy:modSortFunction as modlist">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{ x.dotcount }} dot {{ x.set }} {{ x.slotname }}</span>
+                                <span class="md-subhead">{{ x.charname }}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <p>
+                                {{ x.primary.value }} {{x.primary.type }}
+                            </p>
+                            <p>
+                                <div class="secondary-stats" ng-repeat="secondary in x.secondaries">
+                                    {{ secondary.value }} {{ secondary.type }}
+                                </div>
+                            </p>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </md-content>
+        </div>
     </div>
 
     <script>
@@ -279,6 +307,7 @@
                 $scope.sets = ["Health", "Defense", "Crit Damage", "Crit Chance", "Tenacity", "Offence", "Potency", "Speed"];
                 $scope.primarytypes = ["Speed", "Critical Chance", "Critical Damage", "Potency", "Tenacity", "Accuracy", "Critical Avoidance", "Offense", "Defense", "Health", "Protection"];
                 $scope.secondarytypes = ["Speed", "Critical Chance", "Potency", "Tenacity", "Offense", "Defense", "Health", "Protection", "Offense%", "Defense%", "Health%", "Protection%"];
+                $scope.username = USERNAME_SEGMENT;
                 $scope.mods = MOD_JSON_SEGMENT;
             });
         })();
